@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.weatherapp.Model.WeatherModel;
 import com.example.weatherapp.ViewModel.WeatherViewModel;
@@ -25,7 +27,10 @@ public class WeatherActivity extends AppCompatActivity {
         pressure = findViewById(R.id.pressure);
         tempMin = findViewById(R.id.tempMin);
         tempMax = findViewById(R.id.tempMax);
+        Intent intent = getIntent();
+
         weatherViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
+        weatherViewModel.getWeatherData(intent.getStringExtra("CITY"));
         weatherViewModel.getWeatherLifeData().observe(this, new Observer<WeatherModel>() {
 
             @Override
